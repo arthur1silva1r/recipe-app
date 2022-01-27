@@ -12,16 +12,6 @@ function App() {
         <Route path="/" component={ Login } />
       </BrowserRouter>
     </ContextProvider>
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glas
-      </object>
-    </div>
   );
 }
 
