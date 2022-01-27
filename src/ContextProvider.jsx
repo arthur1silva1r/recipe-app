@@ -9,10 +9,10 @@ const USER_INITIAL_STATE = {
 function ContextProvider({ children }) {
   const [foodsState, setFoodState] = useState({});
   const [drinkState, setDrinkState] = useState({});
-  const [userState, setUserState] = useState(USER_INITIAL_STATE);
+  const [componentTitle, setComponentTitle] = useState('');
 
-  const loginHandler = (obj) => {
-    setUserState(obj);
+  const titleHandler = (name) => {
+    setComponentTitle(name);
   };
 
   const providerObj = {
@@ -21,7 +21,8 @@ function ContextProvider({ children }) {
     userState,
     setDrinkState,
     setFoodState,
-    loginHandler,
+    titleHandler,
+    componentTitle,
   };
 
   return (
