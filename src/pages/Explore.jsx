@@ -11,7 +11,7 @@ export default function Explore() {
 
   return (
     <div>
-      <Header title="Explore" enableSearch={ false } />
+      <Header />
     </div>
   );
 }
