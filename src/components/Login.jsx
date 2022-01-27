@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 // import MyContext from '../MyContext';
 
 function Login() {
@@ -7,9 +8,7 @@ function Login() {
     password: '',
   };
 
-  // useEffect(() => {
-
-  // }, [])
+  const history = useHistory();
 
   const checkButton = (senha, email) => {
     // https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript
@@ -26,6 +25,13 @@ function Login() {
   const inputHandler = ({ target }) => {
     const { name, value } = target;
     setLoginState({ ...loginState, [name]: value });
+  };
+
+  const loginButtonHandler = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/foods');
   };
 
   return (
@@ -51,6 +57,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ checkButton(password, email) }
+        onClick={ loginButtonHandler }
       >
         Login
       </button>
