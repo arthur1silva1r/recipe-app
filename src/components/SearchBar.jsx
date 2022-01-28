@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import MyContext from '../MyContext';
+import { searchFoods, searchDrinks } from '../services/fetchSearch';
 
 const INITIAL_SEARCH_STATE = {
   input: '',
@@ -7,46 +9,25 @@ const INITIAL_SEARCH_STATE = {
 
 function SearchBar() {
   const [searchState, setSearchState] = useState(INITIAL_SEARCH_STATE);
-
+  const { componentTitle } = useContext(MyContext);
   const inputHandler = ({ target }) => {
     const { name, value } = target;
     setSearchState({ ...searchState, [name]: value });
   };
 
-  async function submitHandler() {
+  function submitHandler() {
     const { foodOption, input } = searchState;
-    switch (foodOption) {
-    case 'ingredient': {
-      console.log('ingrediente');
-      const fetchByIngredients = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`)
-        .then((response) => response.json());
-      console.log(fetchByIngredients);
-    }
+    switch (componentTitle) {
+    case 'Foods':
+      searchFoods(foodOption, input);
       break;
-    case 'name': {
-      const fetchByName = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`)
-        .then((response) => response.json());
-      console.log(fetchByName);
-      /* if (fetchByName.meals) {
-
-      } */
-    }
-      break;
-    case 'firstLetter': {
-      if (input.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
-        break;
-      }
-      const fetchByFirstLetter = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${input}`)
-        .then((response) => response.json());
-      console.log(fetchByFirstLetter);
-    }
+    case 'Drinks':
+      searchDrinks(foodOption, input);
       break;
     default:
       break;
     }
   }
-
   return (
     <div>
       <input
