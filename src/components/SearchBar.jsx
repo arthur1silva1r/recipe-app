@@ -11,7 +11,7 @@ const INITIAL_SEARCH_STATE = {
 function SearchBar() {
   const [searchResults, setSearchResults] = useState();
   const [searchState, setSearchState] = useState(INITIAL_SEARCH_STATE);
-  const { componentTitle } = useContext(MyContext);
+  const { componentTitle, setList } = useContext(MyContext);
   const history = useHistory();
   const inputHandler = ({ target }) => {
     const { name, value } = target;
@@ -22,11 +22,15 @@ function SearchBar() {
   useEffect(() => {
     if (searchResults) {
       const key = Object.keys(searchResults)[0];
+      const { location: { pathname } } = history;
       if (searchResults[key] && searchResults[key].length === 1) {
         const key2 = Object.keys(searchResults)[0];
         const key3 = Object.values(searchResults[key2][0])[0];
-        const { location: { pathname } } = history;
         history.push(`${pathname}/${key3}`);
+      } else if (searchResults[key] && searchResults[key].length > 1) {
+        setList(Object.values(searchResults)[0]);
+      } else {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
       }
     }
   }, [searchResults]);
