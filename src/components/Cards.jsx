@@ -45,7 +45,7 @@ export default function Cards() {
     </div>
   );
   return (
-    <div>
+    <div className="cards">
       {
         componentTitle === 'Foods' ? mealContent() : drinkContent()
       }
