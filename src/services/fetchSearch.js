@@ -3,14 +3,12 @@ export async function searchFoods(foodOption, input) {
   case 'ingredient': {
     const fetchByIngredient = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`)
       .then((response) => response.json());
-    console.log(fetchByIngredient);
-    break;
+    return fetchByIngredient;
   }
   case 'name': {
     const fetchByName = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`)
       .then((response) => response.json());
-    console.log(fetchByName);
-    break;
+    return fetchByName;
   }
   case 'firstLetter': {
     if (input.length > 1) {
@@ -19,8 +17,7 @@ export async function searchFoods(foodOption, input) {
     }
     const fetchByFirstLetter = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${input}`)
       .then((response) => response.json());
-    console.log(fetchByFirstLetter);
-    break;
+    return fetchByFirstLetter;
   }
   default:
     break;
@@ -32,14 +29,12 @@ export async function searchDrinks(foodOption, input) {
   case 'ingredient': {
     const fetchByIngredient = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`)
       .then((response) => response.json());
-    console.log(fetchByIngredient);
-    break;
+    return fetchByIngredient;
   }
   case 'name': {
     const fetchByName = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`)
       .then((response) => response.json());
-    console.log(fetchByName);
-    break;
+    return fetchByName;
   }
   case 'firstLetter': {
     if (input.length > 1) {
@@ -48,8 +43,7 @@ export async function searchDrinks(foodOption, input) {
     }
     const fetchByFirstLetter = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${input}`)
       .then((response) => response.json());
-    console.log(fetchByFirstLetter);
-    break;
+    return fetchByFirstLetter;
   }
   default:
     break;

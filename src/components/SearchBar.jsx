@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { searchFoods, searchDrinks } from '../services/fetchSearch';
 
@@ -8,22 +9,41 @@ const INITIAL_SEARCH_STATE = {
 };
 
 function SearchBar() {
+  const [searchResults, setSearchResults] = useState();
   const [searchState, setSearchState] = useState(INITIAL_SEARCH_STATE);
   const { componentTitle } = useContext(MyContext);
+  const history = useHistory();
   const inputHandler = ({ target }) => {
     const { name, value } = target;
     setSearchState({ ...searchState, [name]: value });
   };
+  // console.log(searchResults);
 
-  function submitHandler() {
+  useEffect(() => {
+    if (searchResults) {
+      const key = Object.keys(searchResults)[0];
+      if (searchResults[key] && searchResults[key].length === 1) {
+        const key2 = Object.keys(searchResults)[0];
+        const key3 = Object.values(searchResults[key2][0])[0];
+        const { location: { pathname } } = history;
+        history.push(`${pathname}/${key3}`);
+      }
+    }
+  }, [searchResults]);
+
+  async function submitHandler() {
     const { foodOption, input } = searchState;
     switch (componentTitle) {
-    case 'Foods':
-      searchFoods(foodOption, input);
+    case 'Foods': {
+      const foodResults = await searchFoods(foodOption, input);
+      setSearchResults(foodResults);
       break;
-    case 'Drinks':
-      searchDrinks(foodOption, input);
+    }
+    case 'Drinks': {
+      const drinksResult = await searchDrinks(foodOption, input);
+      setSearchResults(drinksResult);
       break;
+    }
     default:
       break;
     }
