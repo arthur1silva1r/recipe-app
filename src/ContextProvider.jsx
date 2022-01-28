@@ -7,6 +7,7 @@ function ContextProvider({ children }) {
   const [drinkState, setDrinkState] = useState({});
   const [componentTitle, setComponentTitle] = useState('');
   const [searchedFood, setSearchedFood] = useState({});
+  const [listOfResults, setListOfResults] = useState([]);
 
   const searchedFoodHandler = (obj) => {
     setSearchedFood(obj);
@@ -16,6 +17,10 @@ function ContextProvider({ children }) {
     setComponentTitle(name);
   };
 
+  const setList = (array) => {
+    setListOfResults(array);
+  };
+
   const providerObj = {
     searchedFood,
     foodsState,
@@ -23,6 +28,8 @@ function ContextProvider({ children }) {
     setDrinkState,
     setFoodState,
     titleHandler,
+    listOfResults,
+    setList,
     searchedFoodHandler,
     componentTitle,
   };
