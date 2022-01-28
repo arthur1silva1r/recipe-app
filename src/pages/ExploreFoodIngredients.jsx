@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import Header from '../components/Header';
 import MyContext from '../MyContext';
+import Header from '../components/Header';
 
-export default function Explore() {
-  const name = 'Explore';
+export default function ExploreFoodIngredients() {
+  const name = 'Explore Ingredients';
 
   const { titleHandler } = useContext(MyContext);
   useEffect(() => {
@@ -11,8 +11,6 @@ export default function Explore() {
   }, []);
 
   return (
-    <div>
-      <Header />
-    </div>
+    <Header />
   );
 }
