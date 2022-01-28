@@ -8,7 +8,7 @@ export default function ExploreDrinkIngredients() {
   const { titleHandler } = useContext(MyContext);
   useEffect(() => {
     titleHandler(name);
-  }, []);
+  }, [titleHandler]);
 
   return (
     <Header />

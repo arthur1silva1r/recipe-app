@@ -9,6 +9,7 @@ export default function Header() {
   const [hide, setHide] = useState(true);
   const { componentTitle } = useContext(MyContext);
   const pagesWithSearch = ['Foods', 'Explore Nationalities', 'Drinks'];
+
   return (
     <header>
       <Link to="/profile">
