@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../MyContext';
 
@@ -11,6 +12,9 @@ export default function ExploreNationalities() {
   }, [titleHandler]);
 
   return (
-    <Header />
+    <div>
+      <Header />
+      <Footer />
+    </div>
   );
 }

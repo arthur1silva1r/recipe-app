@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import MyContext from '../MyContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function ExploreFoodIngredients() {
   const name = 'Explore Ingredients';
@@ -11,6 +12,9 @@ export default function ExploreFoodIngredients() {
   }, [titleHandler]);
 
   return (
-    <Header />
+    <div>
+      <Header />
+      <Footer />
+    </div>
   );
 }

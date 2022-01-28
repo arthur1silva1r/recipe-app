@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Cards from '../components/Cards';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../MyContext';
 
@@ -15,6 +16,7 @@ export default function Foods() {
     <div>
       <Header />
       <Cards />
+      <Footer />
     </div>
   );
 }
