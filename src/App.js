@@ -7,13 +7,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Explore from './pages/Explore';
 import Foods from './pages/Foods';
 import ExploreFoods from './pages/ExploreFoods';
-import ExploreIngredients from './pages/ExploreIngredients';
+import ExploreFoodIngredients from './pages/ExploreFoodIngredients';
 import ExploreNationalities from './pages/ExploreNationalities';
 import Details from './pages/Detalis';
 import ProcessRecipe from './pages/ProcessRecipe';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Profile from './pages/Profile';
+import Drinks from './pages/Drinks';
+import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
 
 function App() {
   return (
@@ -24,11 +27,22 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/explore" component={ Explore } />
           <Route exact path="/foods" component={ Foods } />
-          <Route exact path="/explore-foods" component={ ExploreFoods } />
-          <Route exact path="/explore-ingredients" component={ ExploreIngredients } />
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route exact path="/explore/foods" component={ ExploreFoods } />
+          <Route exact path="/explore/drinks" component={ ExploreDrinks } />
           <Route
             exact
-            path="/explore-nationalities"
+            path="/explore/foods/ingredients"
+            component={ ExploreFoodIngredients }
+          />
+          <Route
+            exact
+            path="/explore/drinks/ingredients"
+            component={ ExploreDrinkIngredients }
+          />
+          <Route
+            exact
+            path="/explore/foods/nationalities"
             component={ ExploreNationalities }
           />
           <Route exact path="/details" component={ Details } />
