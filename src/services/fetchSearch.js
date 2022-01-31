@@ -66,3 +66,26 @@ export async function searchCategory(url) {
     break;
   }
 }
+
+export async function FilterByButton(category, url) {
+  console.log(category);
+  switch (url) {
+  case '/foods': {
+    console.log('comida');
+    const fetchByF = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+      .then((response) => response.json());
+    console.log(fetchByF);
+    return fetchByF;
+  }
+  case '/drinks': {
+    console.log('bebida');
+    const fetchByFilterDrinks = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`,
+    )
+      .then((response) => response.json());
+    return fetchByFilterDrinks;
+  }
+  default:
+    break;
+  }
+}
