@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
-import { FilterByButton, searchFoods } from '../services/fetchSearch';
+import { FilterByButton, searchDrinks, searchFoods } from '../services/fetchSearch';
 
 export default function FilterButton() {
   const history = useHistory();
@@ -19,8 +19,13 @@ export default function FilterButton() {
   }
 
   const buttonFilter = async ({ target }) => {
+    let drinksResult = '';
     if (target.value === filtroValor) {
-      const drinksResult = await searchFoods('name', '');
+      if (urlLocal === '/foods') {
+        drinksResult = await searchFoods('name', '');
+      } else {
+        drinksResult = await searchDrinks('name', '');
+      }
       setList(drinksResult[foodCategories].slice(0, +'12'));
       setfiltroValor('');
     } else {
