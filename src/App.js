@@ -9,7 +9,7 @@ import Foods from './pages/Foods';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreFoodIngredients from './pages/ExploreFoodIngredients';
 import ExploreNationalities from './pages/ExploreNationalities';
-import Details from './pages/Detalis';
+import Details from './pages/Details';
 import ProcessRecipe from './pages/ProcessRecipe';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
@@ -46,7 +46,7 @@ function App() {
             path="/explore/foods/nationalities"
             component={ ExploreNationalities }
           />
-          <Route exact path="/details" component={ Details } />
+          <Route exact path="/details/:id" component={ Details } />
           <Route exact path="/process-recipe" component={ ProcessRecipe } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
