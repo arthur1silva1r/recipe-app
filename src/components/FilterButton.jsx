@@ -37,6 +37,14 @@ export default function FilterButton() {
 
   return (
     <div className="categoryBar">
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        value={ filtroValor }
+        onClick={ (evt) => buttonFilter(evt) }
+      >
+        All
+      </button>
       {
         (arrayCategories[foodCategories])
           ? arrayCategories[foodCategories].slice(0, +'5').map((acc, index) => (
