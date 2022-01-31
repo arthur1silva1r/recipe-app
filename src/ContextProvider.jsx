@@ -8,6 +8,7 @@ function ContextProvider({ children }) {
   const [componentTitle, setComponentTitle] = useState('');
   const [searchedFood, setSearchedFood] = useState({});
   const [listOfResults, setListOfResults] = useState([]);
+  const [searchResults, setSearchResults] = useState();
 
   const searchedFoodHandler = (obj) => {
     setSearchedFood(obj);
@@ -32,6 +33,8 @@ function ContextProvider({ children }) {
     setList,
     searchedFoodHandler,
     componentTitle,
+    searchResults,
+    setSearchResults,
   };
 
   return (
