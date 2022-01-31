@@ -20,6 +20,7 @@ function SearchBar() {
   // console.log(searchResults);
 
   useEffect(() => {
+    console.log('Teste');
     if (searchResults) {
       const key = Object.keys(searchResults)[0];
       const { location: { pathname } } = history;
@@ -33,7 +34,7 @@ function SearchBar() {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
       }
     }
-  }, [searchResults]);
+  }, [searchResults, history, setList]);
 
   async function submitHandler() {
     const { foodOption, input } = searchState;

@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import Drinks from './pages/Drinks';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
+import './Recipes.css';
 
 function App() {
   return (

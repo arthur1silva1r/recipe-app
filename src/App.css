@@ -2,18 +2,6 @@
   margin-top: 50px;
 }
 
-header {
-  display: flex !important;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  border: 1px solid black;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  background-color: white;
-}
-
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -51,15 +39,6 @@ header {
   font-family: Montserrat , sans-serif;
   font-size: 3em;
   font-weight: 900;
-}
-
-footer {
-  border: 1px solid black;
-  display: flex !important;
-  width: 100%;
-  justify-content: space-around;
-  bottom: 0;
-  position: fixed;
 }
 
 @keyframes shake {
