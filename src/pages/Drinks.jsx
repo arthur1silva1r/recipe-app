@@ -1,21 +1,29 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Cards from '../components/Cards';
+import FilterButton from '../components/FilterButton';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../MyContext';
-import { searchDrinks } from '../services/fetchSearch';
+import { searchCategory, searchDrinks } from '../services/fetchSearch';
 
 export default function Drinks() {
+  const history = useHistory();
   const name = 'Drinks';
-  const { setList } = useContext(MyContext);
+  const { setList, setArrayCategories } = useContext(MyContext);
 
   const renderFirstList = async () => {
     const drinksResult = await searchDrinks('name', '');
     setList(drinksResult.drinks.slice(0, +'12'));
   };
 
+  const searchCat = async () => {
+    setArrayCategories(await searchCategory(history.location.pathname));
+  };
+
   useEffect(() => {
     renderFirstList();
+    searchCat();
   }, []);
 
   const { titleHandler } = useContext(MyContext);
@@ -26,6 +34,7 @@ export default function Drinks() {
   return (
     <div>
       <Header />
+      <FilterButton />
       <Cards />
       <Footer />
     </div>

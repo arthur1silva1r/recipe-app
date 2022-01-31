@@ -49,3 +49,20 @@ export async function searchDrinks(foodOption, input) {
     break;
   }
 }
+
+export async function searchCategory(url) {
+  switch (url) {
+  case '/foods': {
+    const fetchByFirstLetter = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
+      .then((response) => response.json());
+    return fetchByFirstLetter;
+  }
+  case '/drinks': {
+    const fetchByFirstLetter = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
+      .then((response) => response.json());
+    return fetchByFirstLetter;
+  }
+  default:
+    break;
+  }
+}
