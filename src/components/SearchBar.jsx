@@ -20,6 +20,7 @@ function SearchBar() {
   // console.log(searchResults);
 
   useEffect(() => {
+    // console.log('Teste');
     if (searchResults) {
       const key = Object.keys(searchResults)[0];
       const { location: { pathname } } = history;
@@ -27,13 +28,14 @@ function SearchBar() {
         const key2 = Object.keys(searchResults)[0];
         const key3 = Object.values(searchResults[key2][0])[0];
         history.push(`${pathname}/${key3}`);
+        // history.push(`/details/${key3}`);
       } else if (searchResults[key] && searchResults[key].length > 1) {
         setList(Object.values(searchResults)[0]);
       } else {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
       }
     }
-  }, [searchResults]);
+  }, [searchResults, history, setList]);
 
   async function submitHandler() {
     const { foodOption, input } = searchState;

@@ -9,7 +9,7 @@ import Foods from './pages/Foods';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreFoodIngredients from './pages/ExploreFoodIngredients';
 import ExploreNationalities from './pages/ExploreNationalities';
-import Details from './pages/Detalis';
+import Details from './pages/Details';
 import ProcessRecipe from './pages/ProcessRecipe';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import Drinks from './pages/Drinks';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
+import './Recipes.css';
 
 function App() {
   return (
@@ -45,7 +46,8 @@ function App() {
             path="/explore/foods/nationalities"
             component={ ExploreNationalities }
           />
-          <Route exact path="/details" component={ Details } />
+          <Route exact path="/foods/:id" component={ Details } />
+          <Route exact path="/drinks/:id" component={ Details } />
           <Route exact path="/process-recipe" component={ ProcessRecipe } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
