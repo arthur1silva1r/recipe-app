@@ -23,12 +23,12 @@ function SearchBar() {
     // console.log('Teste');
     if (searchResults) {
       const key = Object.keys(searchResults)[0];
-      // const { location: { pathname } } = history;
+      const { location: { pathname } } = history;
       if (searchResults[key] && searchResults[key].length === 1) {
         const key2 = Object.keys(searchResults)[0];
         const key3 = Object.values(searchResults[key2][0])[0];
-        // history.push(`${pathname}/${key3}`);
-        history.push(`/details/${key3}`);
+        history.push(`${pathname}/${key3}`);
+        // history.push(`/details/${key3}`);
       } else if (searchResults[key] && searchResults[key].length > 1) {
         setList(Object.values(searchResults)[0]);
       } else {
