@@ -22,3 +22,14 @@ footer {
 .categoryBar {
   margin-top: 60px;
 }
+
+.recommended-card {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommended-card, img {
+  width: 50%;
+}

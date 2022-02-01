@@ -10,6 +10,16 @@ function ContextProvider({ children }) {
   const [listOfResults, setListOfResults] = useState([]);
   const [searchResults, setSearchResults] = useState();
   const [arrayCategories, setArrayCategories] = useState([]);
+  const [details, setDetails] = useState();
+  const [recommended, setRecommended] = useState();
+
+  const recommendedHandler = (obj) => {
+    setRecommended(obj);
+  };
+
+  const detailsHandler = (obj) => {
+    setDetails(obj);
+  };
 
   const searchedFoodHandler = (obj) => {
     setSearchedFood(obj);
@@ -27,13 +37,17 @@ function ContextProvider({ children }) {
     searchedFood,
     foodsState,
     drinkState,
+    listOfResults,
+    componentTitle,
+    details,
+    recommended,
+    recommendedHandler,
+    detailsHandler,
     setDrinkState,
     setFoodState,
     titleHandler,
-    listOfResults,
     setList,
     searchedFoodHandler,
-    componentTitle,
     searchResults,
     setSearchResults,
     arrayCategories,
