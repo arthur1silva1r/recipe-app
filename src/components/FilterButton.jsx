@@ -1,27 +1,25 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
 import { FilterByButton, searchDrinks, searchFoods } from '../services/fetchSearch';
 
 export default function FilterButton() {
-  const history = useHistory();
-  const { arrayCategories, setList } = useContext(MyContext);
+  const { arrayCategories, setList, componentTitle } = useContext(MyContext);
   const [filtroValor, setfiltroValor] = useState('');
 
-  const urlLocal = history.location.pathname;
+  const urlLocal = componentTitle.toLowerCase();
 
   let foodCategories = '';
 
-  if (urlLocal === '/foods') {
+  if (urlLocal === 'foods') {
     foodCategories = 'meals';
-  } else if (urlLocal === '/drinks') {
+  } else if (urlLocal === 'drinks') {
     foodCategories = 'drinks';
   }
 
   const buttonFilter = async ({ target }) => {
     let drinksResult = '';
     if (target.value === filtroValor) {
-      if (urlLocal === '/foods') {
+      if (urlLocal === 'foods') {
         drinksResult = await searchFoods('name', '');
       } else {
         drinksResult = await searchDrinks('name', '');
