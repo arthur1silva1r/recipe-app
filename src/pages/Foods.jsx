@@ -5,7 +5,7 @@ import FilterButton from '../components/FilterButton';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../MyContext';
-import { searchFoods, searchCategory } from '../services/fetchSearch';
+import { searchFoods, searchCategory } from '../services/fetch';
 
 export default function Foods() {
   const history = useHistory();

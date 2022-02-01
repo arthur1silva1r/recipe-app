@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import MyContext from '../MyContext';
-import { FilterByButton, searchDrinks, searchFoods } from '../services/fetchSearch';
+import { FilterByButton, searchDrinks, searchFoods } from '../services/fetch';
 
 export default function FilterButton() {
   const { arrayCategories, setList, componentTitle } = useContext(MyContext);

@@ -49,12 +49,14 @@ function SearchBar() {
         const key2 = Object.keys(searchResults)[0];
         const key3 = Object.values(searchResults[key2][0])[0];
         history.push(`${pathname}/${key3}`);
+        setSearchResults('');
       } else if (searchResults[key] && searchResults[key].length > 1) {
         setList(Object.values(searchResults)[0]);
       } else {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
       }
     }
+    console.log('teste');
   }, [searchResults, history, setList]);
 
   return (
