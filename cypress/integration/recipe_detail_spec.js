@@ -143,7 +143,7 @@ describe('35 - Desenvolva a tela de forma que contenha uma imagem da receita, o 
 
 describe('36 - Implemente as recomendações, para receitas de comida, a recomendação deverá ser bebida e vice-versa', () => {
   it('Verifica se a requisição para a API de bebidas foi realizada', () => {
-    cy.visit('http://localhost:3000/foods/52771', {
+    cy.visit('http://localhost:3000/drinks/178319', {
       onBeforeLoad(win) {
         cy.spy(win, 'fetch');
       },
@@ -155,7 +155,7 @@ describe('36 - Implemente as recomendações, para receitas de comida, a recomen
   });
 
   it('Verifica se a requisição para a API de comidas foi realizada', () => {
-    cy.visit('http://localhost:3000/drinks/178319', {
+    cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
         cy.spy(win, 'fetch');
       },

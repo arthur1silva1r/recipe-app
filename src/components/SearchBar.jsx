@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
-import { searchFoods, searchDrinks } from '../services/fetchSearch';
+import { searchFoods, searchDrinks } from '../services/fetch';
 
 const INITIAL_SEARCH_STATE = {
   input: '',
@@ -28,7 +28,6 @@ function SearchBar() {
         const key2 = Object.keys(searchResults)[0];
         const key3 = Object.values(searchResults[key2][0])[0];
         history.push(`${pathname}/${key3}`);
-        // history.push(`/details/${key3}`);
       } else if (searchResults[key] && searchResults[key].length > 1) {
         setList(Object.values(searchResults)[0]);
       } else {
