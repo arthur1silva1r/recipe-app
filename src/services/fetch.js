@@ -63,11 +63,11 @@ export async function fetchDetails(id, category) {
 
 export async function fetchRecommended(category) {
   if (category === 'foods') {
-    const result = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+    const result = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json());
     return result;
   }
-  const result = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+  const result = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
     .then((response) => response.json());
   return result;
 }
