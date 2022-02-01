@@ -9,15 +9,36 @@ const INITIAL_SEARCH_STATE = {
 };
 
 function SearchBar() {
-  const [searchResults, setSearchResults] = useState();
   const [searchState, setSearchState] = useState(INITIAL_SEARCH_STATE);
-  const { componentTitle, setList } = useContext(MyContext);
+  const { componentTitle,
+    setList,
+    searchResults,
+    setSearchResults,
+  } = useContext(MyContext);
   const history = useHistory();
   const inputHandler = ({ target }) => {
     const { name, value } = target;
     setSearchState({ ...searchState, [name]: value });
   };
   // console.log(searchResults);
+
+  async function submitHandler() {
+    const { foodOption, input } = searchState;
+    switch (componentTitle) {
+    case 'Foods': {
+      const foodResults = await searchFoods(foodOption, input);
+      setSearchResults(foodResults);
+      break;
+    }
+    case 'Drinks': {
+      const drinksResult = await searchDrinks(foodOption, input);
+      setSearchResults(drinksResult);
+      break;
+    }
+    default:
+      break;
+    }
+  }
 
   useEffect(() => {
     // console.log('Teste');
@@ -37,23 +58,6 @@ function SearchBar() {
     }
   }, [searchResults, history, setList]);
 
-  async function submitHandler() {
-    const { foodOption, input } = searchState;
-    switch (componentTitle) {
-    case 'Foods': {
-      const foodResults = await searchFoods(foodOption, input);
-      setSearchResults(foodResults);
-      break;
-    }
-    case 'Drinks': {
-      const drinksResult = await searchDrinks(foodOption, input);
-      setSearchResults(drinksResult);
-      break;
-    }
-    default:
-      break;
-    }
-  }
   return (
     <div>
       <input

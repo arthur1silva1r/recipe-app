@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
 function ContextProvider({ children }) {
@@ -8,6 +8,8 @@ function ContextProvider({ children }) {
   const [componentTitle, setComponentTitle] = useState('');
   const [searchedFood, setSearchedFood] = useState({});
   const [listOfResults, setListOfResults] = useState([]);
+  const [searchResults, setSearchResults] = useState();
+  const [arrayCategories, setArrayCategories] = useState([]);
 
   const searchedFoodHandler = (obj) => {
     setSearchedFood(obj);
@@ -32,6 +34,10 @@ function ContextProvider({ children }) {
     setList,
     searchedFoodHandler,
     componentTitle,
+    searchResults,
+    setSearchResults,
+    arrayCategories,
+    setArrayCategories,
   };
 
   return (
