@@ -33,3 +33,9 @@ footer {
 .recommended-card, img {
   width: 50%;
 }
+
+.start-recipe {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}

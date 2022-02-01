@@ -4,6 +4,7 @@ import MyContext from '../MyContext';
 import { fetchDetails, fetchRecommended } from '../services/fetch';
 import IngredientsList from '../components/IngredientsList';
 import RecommendedCards from '../components/RecommendedCards';
+import '../Recipes.css';
 
 export default function Details() {
   const { detailsHandler, recommendedHandler } = useContext(MyContext);
@@ -65,6 +66,7 @@ export default function Details() {
           <button
             type="button"
             data-testid="start-recipe-btn"
+            className="start-recipe"
           >
             Iniciar receita
           </button>
@@ -120,6 +122,7 @@ export default function Details() {
           <button
             type="button"
             data-testid="start-recipe-btn"
+            className="start-recipe"
           >
             Iniciar receita
           </button>
