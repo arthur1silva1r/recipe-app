@@ -12,6 +12,13 @@ function ContextProvider({ children }) {
   const [arrayCategories, setArrayCategories] = useState([]);
   const [details, setDetails] = useState();
   const [recommended, setRecommended] = useState();
+  const [arrayIngredients, setArrayIngredients] = useState([]);
+  const [arrayMeasure, setArrayMeasure] = useState([]);
+  const [ingredientsProgress, setIngredientsProgress] = useState();
+
+  const ingredientsProgressHandler = (obj) => {
+    setIngredientsProgress(obj);
+  };
 
   const recommendedHandler = (obj) => {
     setRecommended(obj);
@@ -34,6 +41,9 @@ function ContextProvider({ children }) {
   };
 
   const providerObj = {
+    arrayIngredients,
+    ingredientsProgress,
+    arrayMeasure,
     searchedFood,
     foodsState,
     drinkState,
@@ -49,9 +59,13 @@ function ContextProvider({ children }) {
     setList,
     searchedFoodHandler,
     searchResults,
+    setArrayIngredients,
     setSearchResults,
     arrayCategories,
     setArrayCategories,
+    setArrayMeasure,
+    ingredientsProgressHandler,
+
   };
 
   return (
