@@ -5,18 +5,30 @@ import { fetchDetails, fetchRecommended } from '../services/fetch';
 import IngredientsList from '../components/IngredientsList';
 import RecommendedCards from '../components/RecommendedCards';
 import '../Recipes.css';
+import shareIcon from '../images/shareIcon.svg';
+
+const msg = 'Link copied!';
 
 export default function Details() {
   const { detailsHandler, recommendedHandler } = useContext(MyContext);
   const history = useHistory();
   const [details, setDetails] = useState();
+  const [showTag, setShowTag] = useState(false);
   const { pathname } = history.location;
+
+  const copyHandler = () => {
+    console.log(pathname);
+    navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
+    global.alert(msg);
+    setShowTag(true);
+  };
 
   const mealContent = () => {
     if (details) {
       const { meals } = details;
       const infos = meals[0];
       const {
+        idMeal,
         strMealThumb,
         strMeal,
         strCategory,
@@ -38,9 +50,11 @@ export default function Details() {
           <button
             type="button"
             data-testid="share-btn"
+            onClick={ copyHandler }
           >
-            Compartilhar
+            <img src={ shareIcon } alt="share button" />
           </button>
+          <span>{ showTag && msg }</span>
           <button
             type="button"
             data-testid="favorite-btn"
@@ -67,6 +81,7 @@ export default function Details() {
             type="button"
             data-testid="start-recipe-btn"
             className="start-recipe"
+            onClick={ () => history.push(`/foods/${idMeal}/in-progress`) }
           >
             Iniciar receita
           </button>
@@ -81,6 +96,7 @@ export default function Details() {
       const { drinks } = details;
       const infos = drinks[0];
       const {
+        idDrink,
         strDrinkThumb,
         strDrink,
         strInstructions,
@@ -101,9 +117,11 @@ export default function Details() {
           <button
             type="button"
             data-testid="share-btn"
+            onClick={ copyHandler }
           >
-            Compartilhar
+            <img src={ shareIcon } alt="share button" />
           </button>
+          <span>{ showTag && msg }</span>
           <button
             type="button"
             data-testid="favorite-btn"
@@ -123,6 +141,7 @@ export default function Details() {
             type="button"
             data-testid="start-recipe-btn"
             className="start-recipe"
+            onClick={ () => history.push(`/drinks/${idDrink}/in-progress`) }
           >
             Iniciar receita
           </button>

@@ -14,6 +14,8 @@ export default function IngredientsList() {
       if (recipe[`strIngredient${i}`]) {
         ingredients.push(recipe[`strIngredient${i}`]);
         measures.push(recipe[`strMeasure${i}`]);
+        // setArrayIngredients(ingredients);
+        // setArrayMeasure(measures);
       }
     }
 
