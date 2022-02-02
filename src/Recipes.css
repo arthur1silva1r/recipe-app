@@ -48,8 +48,23 @@ footer {
 }
 
 .empty {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 200px;
+}
+
+.explore-btn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+  width: 60%;
+}
+
+.explore-foods-btn {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  margin-top: 200px;
 }

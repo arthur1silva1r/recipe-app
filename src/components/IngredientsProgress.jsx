@@ -1,23 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import MyContext from '../MyContext';
 import '../ProgressRecipe.css';
 
 export default function IngredientsProgress() {
-  const { ingredientsProgress, componentTitle } = useContext(MyContext);
-
-  const inProgressRecipes = componentTitle === 'Foods'
-    ? {
-      meals: {
-        idMeal: [],
-      },
-    }
-    : {
-      cocktails: {
-        idDrink: [],
-      },
-    };
-
-  const [progressRecipes, setProgressRecipes] = useState(inProgressRecipes);
+  const { ingredientsProgress } = useContext(MyContext);
 
   const ingredientsContent = () => {
     const ingredients = [];

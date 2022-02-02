@@ -6,6 +6,8 @@ import IngredientsList from '../components/IngredientsList';
 import RecommendedCards from '../components/RecommendedCards';
 import '../Recipes.css';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const msg = 'Link copied!';
 
@@ -14,6 +16,7 @@ export default function Details() {
   const history = useHistory();
   const [details, setDetails] = useState();
   const [showTag, setShowTag] = useState(false);
+  const [favorite, setFavorite] = useState(whiteHeartIcon);
   const { pathname } = history.location;
 
   const copyHandler = () => {
@@ -21,6 +24,20 @@ export default function Details() {
     navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
     global.alert(msg);
     setShowTag(true);
+  };
+
+  const toggleFavorite = () => {
+    const button = document.getElementById('favorite-btn');
+    console.log(button);
+    if (favorite === whiteHeartIcon) {
+      button.setAttribute('src', 'blackHeartIcon');
+      setFavorite(blackHeartIcon);
+      localStorage.setItem('favorito', true);
+    } else {
+      setFavorite(whiteHeartIcon);
+      button.setAttribute('src', 'whiteHeartIcon');
+      localStorage.setItem('favorito', false);
+    }
   };
 
   const mealContent = () => {
@@ -56,10 +73,15 @@ export default function Details() {
           </button>
           <span>{ showTag && msg }</span>
           <button
+            aria-label="favorite-btn"
             type="button"
+            id="favorite-btn"
+            name="favorite-btn"
             data-testid="favorite-btn"
+            onClick={ toggleFavorite }
+            src=""
           >
-            Favoritar
+            <img src={ favorite } alt="favorite btn" />
           </button>
           <p data-testid="recipe-category">
             { strCategory }
@@ -125,8 +147,11 @@ export default function Details() {
           <button
             type="button"
             data-testid="favorite-btn"
+            onClick={ toggleFavorite }
+            src=""
+            id="favorite-btn"
           >
-            Favoritar
+            <img src={ favorite } alt="Favorite Button" />
           </button>
           <p data-testid="recipe-category">
             { strAlcoholic }
@@ -155,6 +180,12 @@ export default function Details() {
     const path = pathname.includes('foods') ? 'foods' : 'drinks';
     const arrayId = pathname.split('/');
     const id = arrayId[arrayId.length - 1];
+    const favoriteRecipe = localStorage.getItem('favorito');
+    if (favoriteRecipe === 'true') {
+      setFavorite(blackHeartIcon);
+    } else if (favoriteRecipe === 'false') {
+      setFavorite(whiteHeartIcon);
+    }
 
     (async () => {
       const result = await fetchDetails(id, path);
