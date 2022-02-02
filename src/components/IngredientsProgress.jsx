@@ -1,9 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import MyContext from '../MyContext';
 import '../ProgressRecipe.css';
 
 export default function IngredientsProgress() {
-  const { ingredientsProgress } = useContext(MyContext);
+  const { ingredientsProgress, componentTitle } = useContext(MyContext);
+
+  const inProgressRecipes = componentTitle === 'Foods'
+    ? {
+      meals: {
+        idMeal: [],
+      },
+    }
+    : {
+      cocktails: {
+        idDrink: [],
+      },
+    };
+
+  const [progressRecipes, setProgressRecipes] = useState(inProgressRecipes);
 
   const ingredientsContent = () => {
     const ingredients = [];
@@ -28,6 +42,7 @@ export default function IngredientsProgress() {
         target.parentNode.classList.remove('checked');
         localStorage.setItem(`${target.id}`, false);
       }
+
       /* const item = document.getElementById(`ingredient-item-${ingredient}`);
       const listClass = item.classList;
       const checkbox = document.getElementById(`checkbox${index}`);
@@ -44,21 +59,21 @@ export default function IngredientsProgress() {
     return (
       <ul>
         { ingredients.map((ingredient, index) => {
-          const teste = JSON.parse(localStorage.getItem(`checkbox${index}`));
-          console.log(teste);
+          const isChecked = JSON.parse(localStorage.getItem(`checkbox${index}`));
+          console.log(isChecked);
           return (
             <li
               id={ `ingredient-item-${ingredient}` }
               key={ index }
-              data-testid="ingredient-step"
-              className={ teste && 'checked' }
+              data-testid={ `${index}-ingredient-step` }
+              className={ isChecked ? 'checked' : '' }
             >
               <input
                 type="checkbox"
                 id={ `checkbox${index}` }
                 index={ index }
                 onChange={ toggleChecked }
-                checked={ teste }
+                defaultChecked={ isChecked }
               />
               { `${ingredient}: ${measures[index]}` }
             </li>
