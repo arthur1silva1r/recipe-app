@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
-import { fetchDetails, fetchRecommended } from '../services/fetch';
+import {
+  fetchDetails,
+  fetchRecommended,
+  createRecipe,
+  alteraIcon,
+} from '../services/fetch';
 import IngredientsList from '../components/IngredientsList';
 import RecommendedCards from '../components/RecommendedCards';
 import '../Recipes.css';
@@ -14,10 +19,27 @@ const msg = 'Link copied!';
 export default function Details() {
   const { detailsHandler, recommendedHandler } = useContext(MyContext);
   const history = useHistory();
+  const { pathname } = history.location;
   const [details, setDetails] = useState();
   const [showTag, setShowTag] = useState(false);
-  const [favorite, setFavorite] = useState(whiteHeartIcon);
-  const { pathname } = history.location;
+  const [favorite, setFavorite] = useState('');
+
+  useEffect(() => {
+    // const NUMBER_OF_CHARACTERS = 1;
+    const path = pathname.includes('foods') ? 'foods' : 'drinks';
+    const arrayId = pathname.split('/');
+    const id = arrayId[arrayId.length - 1];
+
+    (async () => {
+      const result = await fetchDetails(id, path);
+      const recommendedResults = await fetchRecommended(path);
+      recommendedHandler(recommendedResults);
+      setDetails(result);
+      const icone = alteraIcon(pathname, result);
+      setFavorite(icone);
+      detailsHandler(result);
+    })();
+  }, []);
 
   const copyHandler = () => {
     console.log(pathname);
@@ -26,18 +48,23 @@ export default function Details() {
     setShowTag(true);
   };
 
-  const toggleFavorite = () => {
-    const button = document.getElementById('favorite-btn');
-    console.log(button);
+  function changeSrc() {
+    const btnFav = document.getElementById('favorite-btn');
+    const imagemIcone = document.getElementById('iconeFav');
     if (favorite === whiteHeartIcon) {
-      button.setAttribute('src', 'blackHeartIcon');
       setFavorite(blackHeartIcon);
-      localStorage.setItem('favorito', true);
-    } else {
+      imagemIcone.setAttribute('src', blackHeartIcon);
+      btnFav.setAttribute('src', 'blackHeartIcon');
+    } else if (favorite === blackHeartIcon) {
       setFavorite(whiteHeartIcon);
-      button.setAttribute('src', 'whiteHeartIcon');
-      localStorage.setItem('favorito', false);
+      imagemIcone.setAttribute('src', whiteHeartIcon);
+      btnFav.setAttribute('src', 'whiteHeartIcon');
     }
+  }
+
+  const toggleFavorite = () => {
+    createRecipe(details);
+    changeSrc();
   };
 
   const mealContent = () => {
@@ -72,17 +99,18 @@ export default function Details() {
             <img src={ shareIcon } alt="share button" />
           </button>
           <span>{ showTag && msg }</span>
+
           <button
-            aria-label="favorite-btn"
             type="button"
             id="favorite-btn"
             name="favorite-btn"
             data-testid="favorite-btn"
             onClick={ toggleFavorite }
-            src=""
+            src="whiteHeartIcon"
           >
-            <img src={ favorite } alt="favorite btn" />
+            <img id="iconeFav" src={ favorite } alt="favorite btn" />
           </button>
+
           <p data-testid="recipe-category">
             { strCategory }
           </p>
@@ -144,15 +172,16 @@ export default function Details() {
             <img src={ shareIcon } alt="share button" />
           </button>
           <span>{ showTag && msg }</span>
+
           <button
             type="button"
             data-testid="favorite-btn"
             onClick={ toggleFavorite }
-            src=""
             id="favorite-btn"
           >
-            <img src={ favorite } alt="Favorite Button" />
+            <img id="iconeFav" src={ favorite } alt="Favorite Button" />
           </button>
+
           <p data-testid="recipe-category">
             { strAlcoholic }
           </p>
@@ -174,27 +203,6 @@ export default function Details() {
       );
     }
   };
-
-  useEffect(() => {
-    // const NUMBER_OF_CHARACTERS = 1;
-    const path = pathname.includes('foods') ? 'foods' : 'drinks';
-    const arrayId = pathname.split('/');
-    const id = arrayId[arrayId.length - 1];
-    const favoriteRecipe = localStorage.getItem('favorito');
-    if (favoriteRecipe === 'true') {
-      setFavorite(blackHeartIcon);
-    } else if (favoriteRecipe === 'false') {
-      setFavorite(whiteHeartIcon);
-    }
-
-    (async () => {
-      const result = await fetchDetails(id, path);
-      const recommendedResults = await fetchRecommended(path);
-      recommendedHandler(recommendedResults);
-      setDetails(result);
-      detailsHandler(result);
-    })();
-  }, []);
 
   return (
     <div>
