@@ -5,7 +5,7 @@ import '../ProgressRecipe.css';
 
 export default function IngredientsProgress() {
   const { ingredientsProgress } = useContext(MyContext);
-  const [progress, setProgress] = useState(['notStarted']);
+  const [progress, setProgress] = useState([]);
 
   const history = useHistory();
   const { location: { pathname } } = history;
