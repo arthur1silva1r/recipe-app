@@ -95,7 +95,6 @@ export default function ProcessRecipe() {
   };
 
   const drinkContent = () => {
-    console.log(details);
     if (details) {
       const { drinks } = details;
       const infos = drinks[0];
