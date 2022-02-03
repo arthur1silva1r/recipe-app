@@ -140,7 +140,7 @@ export function createRecipe(details) {
     objRecipe = {
       id: obj.idDrink,
       type: 'drink',
-      nationality: obj.strArea,
+      nationality: '',
       category: obj.strCategory,
       alcoholicOrNot: obj.strAlcoholic,
       name: obj.strDrink,

@@ -54,11 +54,11 @@ export default function Details() {
     if (favorite === whiteHeartIcon) {
       setFavorite(blackHeartIcon);
       imagemIcone.setAttribute('src', blackHeartIcon);
-      btnFav.setAttribute('src', 'blackHeartIcon');
+      btnFav.setAttribute('src', blackHeartIcon);
     } else if (favorite === blackHeartIcon) {
       setFavorite(whiteHeartIcon);
       imagemIcone.setAttribute('src', whiteHeartIcon);
-      btnFav.setAttribute('src', 'whiteHeartIcon');
+      btnFav.setAttribute('src', whiteHeartIcon);
     }
   }
 
@@ -106,7 +106,7 @@ export default function Details() {
             name="favorite-btn"
             data-testid="favorite-btn"
             onClick={ toggleFavorite }
-            src="whiteHeartIcon"
+            src={ favorite }
           >
             <img id="iconeFav" src={ favorite } alt="favorite btn" />
           </button>
@@ -178,6 +178,7 @@ export default function Details() {
             data-testid="favorite-btn"
             onClick={ toggleFavorite }
             id="favorite-btn"
+            src={ favorite }
           >
             <img id="iconeFav" src={ favorite } alt="Favorite Button" />
           </button>
