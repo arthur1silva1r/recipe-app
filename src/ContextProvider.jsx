@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
+const inProgressRecipes = {
+  cocktails: {
+    idDrink: [],
+  },
+  meals: {
+    idMeal: [],
+  },
+};
+
 function ContextProvider({ children }) {
   const [foodsState, setFoodState] = useState({});
   const [drinkState, setDrinkState] = useState({});
@@ -15,6 +24,7 @@ function ContextProvider({ children }) {
   const [arrayIngredients, setArrayIngredients] = useState([]);
   const [arrayMeasure, setArrayMeasure] = useState([]);
   const [ingredientsProgress, setIngredientsProgress] = useState();
+  const [progressRecipe, setProgressRecipe] = useState(inProgressRecipes);
 
   const ingredientsProgressHandler = (obj) => {
     setIngredientsProgress(obj);
@@ -41,6 +51,8 @@ function ContextProvider({ children }) {
   };
 
   const providerObj = {
+    progressRecipe,
+    setProgressRecipe,
     arrayIngredients,
     ingredientsProgress,
     arrayMeasure,

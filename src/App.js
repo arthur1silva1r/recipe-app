@@ -46,6 +46,11 @@ function App() {
             path="/explore/foods/nationalities"
             component={ ExploreNationalities }
           />
+          <Route
+            exact
+            path="/explore/drinks/nationalities"
+            component={ ExploreNationalities }
+          />
           <Route exact path="/foods/:id" component={ Details } />
           <Route exact path="/drinks/:id" component={ Details } />
           <Route exact path="/foods/:id/in-progress" component={ ProcessRecipe } />

@@ -111,3 +111,9 @@ export async function fetchRecommended(category) {
     .then((response) => response.json());
   return result;
 }
+
+export async function fetchRandom(endpoint) {
+  const randomMeal = await fetch(endpoint)
+    .then((res) => res.json());
+  return randomMeal;
+}
