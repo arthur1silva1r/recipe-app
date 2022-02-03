@@ -1,9 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import MyContext from '../MyContext';
 import '../ProgressRecipe.css';
 
 export default function IngredientsProgress() {
   const { ingredientsProgress } = useContext(MyContext);
+  const [progress, setProgress] = useState([]);
+
+  const history = useHistory();
+  const { location: { pathname } } = history;
+  const path = pathname.split('/')[1];
+  const id = pathname.split('/')[2];
+
+  const progressStorageObj = { cocktails: {}, meals: {} };
+
+  // Esse useEffect tem a função de garantir que o localState mantenha a informação dos checkboxes marcados
+  useEffect(() => {
+    const storageTarget = path === 'foods' ? 'meals' : 'cocktails';
+    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgress) {
+      const teste = recipesInProgress[storageTarget][id];
+      if (teste) {
+        setProgress(teste);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const storageTarget = path === 'foods' ? 'meals' : 'cocktails';
+
+    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgress) {
+      const prevObj = recipesInProgress;
+      const previousIds = prevObj[storageTarget];
+      const test = { ...prevObj, [storageTarget]: { ...previousIds, [id]: progress } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(test));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(progressStorageObj));
+    }
+  }, [progress]);
 
   const ingredientsContent = () => {
     const ingredients = [];
@@ -20,33 +55,22 @@ export default function IngredientsProgress() {
     }
 
     const toggleChecked = ({ target }) => {
-      console.log(target.parentNode);
       if (target.checked === true) {
         target.parentNode.setAttribute('class', 'checked');
-        localStorage.setItem(`${target.id}`, true);
+        setProgress([...progress, target.id]);
       } else {
         target.parentNode.classList.remove('checked');
-        localStorage.setItem(`${target.id}`, false);
+        setProgress(progress.filter((checkbox) => checkbox !== target.id));
       }
-
-      /* const item = document.getElementById(`ingredient-item-${ingredient}`);
-      const listClass = item.classList;
-      const checkbox = document.getElementById(`checkbox${index}`);
-      if (listClass.contains('checked')) {
-        item.className = '';
-        localStorage.setItem(`checkbox${index}`, checkbox.checked);
-      } else {
-        item.className = 'checked';
-        localStorage.setItem(`checkbox${index}`, checkbox.checked);
-      }
-      */
     };
+
+    const checkValidator = (index) => progress.includes(`checkbox${index}`);
 
     return (
       <ul>
         { ingredients.map((ingredient, index) => {
-          const isChecked = JSON.parse(localStorage.getItem(`checkbox${index}`));
-          console.log(isChecked);
+          const isChecked = checkValidator(index);
+          // console.log(isChecked);
           return (
             <li
               id={ `ingredient-item-${ingredient}` }
