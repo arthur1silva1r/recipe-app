@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import MyContext from '../MyContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function RecommendedCards() {
   const { recommended } = useContext(MyContext);
