@@ -11,7 +11,6 @@ export default function ProcessRecipe() {
   const [details, setDetails] = useState();
   const history = useHistory();
   const { pathname } = history.location;
-
   useEffect(() => {
     const path = pathname.includes('foods') ? 'foods' : 'drinks';
     const arrayId = pathname.split('/');

@@ -1,3 +1,6 @@
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+
 export async function searchFoods(foodOption, input) {
   switch (foodOption) {
   case 'ingredient': {
@@ -116,4 +119,68 @@ export async function fetchRandom(endpoint) {
   const randomMeal = await fetch(endpoint)
     .then((res) => res.json());
   return randomMeal;
+}
+
+export function createRecipe(details) {
+  let objRecipe = {};
+  const typeObj = Object.keys(details);
+  if (typeObj.includes('meals')) {
+    const obj = details.meals[0];
+    objRecipe = {
+      id: obj.idMeal,
+      type: 'food',
+      nationality: obj.strArea,
+      category: obj.strCategory,
+      alcoholicOrNot: '',
+      name: obj.strMeal,
+      image: obj.strMealThumb,
+    };
+  } else {
+    const obj = details.drinks[0];
+    objRecipe = {
+      id: obj.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: obj.strCategory,
+      alcoholicOrNot: obj.strAlcoholic,
+      name: obj.strDrink,
+      image: obj.strDrinkThumb,
+    };
+  }
+
+  const arrayFavoritas = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (arrayFavoritas) {
+    const existe = arrayFavoritas.some((favorita) => favorita.id === objRecipe.id);
+    const elementoARetirar = arrayFavoritas.find((aiai) => aiai.id === objRecipe.id);
+    if (existe) {
+      const indexARetirar = arrayFavoritas.indexOf(elementoARetirar);
+      arrayFavoritas.splice(indexARetirar, 1);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(arrayFavoritas));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([
+        ...arrayFavoritas, objRecipe]));
+    }
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([
+      objRecipe]));
+  }
+}
+
+export function alteraIcon(pathname, details) {
+  let idVerified = '';
+  if (pathname.includes('foods')) {
+    console.log(details);
+    idVerified = details.meals[0].idMeal;
+  } else {
+    idVerified = details.drinks[0].idDrink;
+  }
+  const arrayFavoritas = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (arrayFavoritas) {
+    const existe = arrayFavoritas.some((favorita) => favorita.id === idVerified);
+    if (existe) {
+      return (blackHeartIcon);
+    }
+    return (whiteHeartIcon);
+  }
+  return (whiteHeartIcon);
 }
