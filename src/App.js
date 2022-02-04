@@ -18,6 +18,7 @@ import Drinks from './pages/Drinks';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreDrinkIngredients from './pages/ExploreDrinkIngredients';
 import './Recipes.css';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
           <Route
             exact
             path="/explore/drinks/nationalities"
-            component={ ExploreNationalities }
+            component={ NotFound }
           />
           <Route exact path="/foods/:id" component={ Details } />
           <Route exact path="/drinks/:id" component={ Details } />

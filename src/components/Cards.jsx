@@ -7,8 +7,9 @@ export default function Cards() {
   let [id, thumb, str] = '';
   const MAX_ITEMS = 12;
   const url = componentTitle.toLowerCase();
+  console.log(url);
 
-  if (url === 'foods') {
+  if (url === 'foods' || url === 'explore nationalities') {
     id = 'idMeal';
     thumb = 'strMealThumb';
     str = 'strMeal';
@@ -18,8 +19,6 @@ export default function Cards() {
     str = 'strDrink';
   }
 
-  console.log(ingredient);
-
   function allCards() {
     return (
       <div className="cards">
@@ -27,7 +26,11 @@ export default function Cards() {
           listOfResults.slice(0, MAX_ITEMS).map((element, index) => (
             <Link
               key={ element[str] }
-              to={ `${url}/${element[id]}` }
+              to={
+                url === 'explore nationalities' ? (
+                  `/foods/${element[id]}`
+                ) : (`${url}/${element[id]}`)
+              }
             >
               <div
                 key={ element[str] }
