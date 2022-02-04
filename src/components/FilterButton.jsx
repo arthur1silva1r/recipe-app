@@ -56,7 +56,7 @@ export default function FilterButton() {
               {acc.strCategory}
             </button>
           ))
-          : console.log(arrayCategories)
+          : ''
       }
     </div>
   );

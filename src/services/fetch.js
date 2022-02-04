@@ -184,3 +184,13 @@ export function alteraIcon(pathname, details) {
   }
   return (whiteHeartIcon);
 }
+
+export const fetchByIngredient = async (path) => {
+  if (path === 'foods') {
+    const result = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
+      .then((response) => response.json());
+    return result;
+  } const result = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+    .then((response) => response.json());
+  return result;
+};
