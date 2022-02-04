@@ -22,6 +22,11 @@ export async function searchFoods(foodOption, input) {
       .then((response) => response.json());
     return fetchByFirstLetter;
   }
+  case 'nationality': {
+    const result = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json());
+    return result;
+  }
   default:
     break;
   }
@@ -191,6 +196,18 @@ export const fetchByIngredient = async (path) => {
       .then((response) => response.json());
     return result;
   } const result = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+    .then((response) => response.json());
+  return result;
+};
+
+export const fetchCountries = async () => {
+  const result = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+    .then((response) => response.json());
+  return result;
+};
+
+export const fetchByNationality = async (country) => {
+  const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`)
     .then((response) => response.json());
   return result;
 };
