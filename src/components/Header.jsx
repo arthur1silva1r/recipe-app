@@ -15,7 +15,7 @@ export default function Header() {
       <Link to="/profile">
         <img src={ profileIcon } data-testid="profile-top-btn" alt="Profile" />
       </Link>
-      <h1 data-testid="page-title">{ componentTitle }</h1>
+      <span data-testid="page-title">{ componentTitle }</span>
       {
         pagesWithSearch.includes(componentTitle)
         && (

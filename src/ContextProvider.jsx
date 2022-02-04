@@ -25,6 +25,11 @@ function ContextProvider({ children }) {
   const [arrayMeasure, setArrayMeasure] = useState([]);
   const [ingredientsProgress, setIngredientsProgress] = useState();
   const [progressRecipe, setProgressRecipe] = useState(inProgressRecipes);
+  const [ingredient, setIngredient] = useState([]);
+
+  const setIngredientHandler = (array) => {
+    setIngredient(array);
+  };
 
   const ingredientsProgressHandler = (obj) => {
     setIngredientsProgress(obj);
@@ -52,6 +57,7 @@ function ContextProvider({ children }) {
 
   const providerObj = {
     progressRecipe,
+    ingredient,
     setProgressRecipe,
     arrayIngredients,
     ingredientsProgress,
@@ -77,7 +83,8 @@ function ContextProvider({ children }) {
     setArrayCategories,
     setArrayMeasure,
     ingredientsProgressHandler,
-
+    setIngredient,
+    setIngredientHandler,
   };
 
   return (

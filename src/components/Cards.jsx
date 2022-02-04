@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MyContext from '../MyContext';
 
 export default function Cards() {
-  const { listOfResults, componentTitle } = useContext(MyContext);
+  const { listOfResults, ingredient, componentTitle } = useContext(MyContext);
   let [id, thumb, str] = '';
   const MAX_ITEMS = 12;
   const url = componentTitle.toLowerCase();
@@ -18,29 +18,65 @@ export default function Cards() {
     str = 'strDrink';
   }
 
-  return (
-    <div className="cards">
-      {
-        listOfResults.slice(0, MAX_ITEMS).map((element, index) => (
-          <Link
-            key={ element[str] }
-            to={ `${url}/${element[id]}` }
-          >
-            <div
+  console.log(ingredient);
+
+  function allCards() {
+    return (
+      <div className="cards">
+        {
+          listOfResults.slice(0, MAX_ITEMS).map((element, index) => (
+            <Link
               key={ element[str] }
-              data-testid={ `${index}-recipe-card` }
+              to={ `${url}/${element[id]}` }
             >
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ element[thumb] }
-                alt="recipe-thumbnail"
-                width="300px"
-              />
-              <h1 data-testid={ `${index}-card-name` }>{element[str]}</h1>
-            </div>
-          </Link>
-        ))
-      }
-    </div>
-  );
+              <div
+                key={ element[str] }
+                data-testid={ `${index}-recipe-card` }
+              >
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ element[thumb] }
+                  alt="recipe-thumbnail"
+                  width="300px"
+                />
+                <h1 data-testid={ `${index}-card-name` }>{element[str]}</h1>
+              </div>
+            </Link>
+          ))
+        }
+      </div>
+    );
+  }
+
+  function filterByIngredient() {
+    console.log('filter');
+    return (
+      <div className="cards">
+        {
+          ingredient.slice(0, MAX_ITEMS).map((element, index) => (
+            <Link
+              key={ element[str] }
+              to={ `${url}/${element[id]}` }
+            >
+              <div
+                key={ element[str] }
+                data-testid={ `${index}-recipe-card` }
+                className="filtered"
+              >
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ element[thumb] }
+                  alt="recipe-thumbnail"
+                  width="300px"
+                />
+                <h1 data-testid={ `${index}-card-name` }>{element[str]}</h1>
+              </div>
+            </Link>
+          ))
+        }
+      </div>
+    );
+  }
+
+  return ingredient.length > 0 ? filterByIngredient() : allCards();
 }
