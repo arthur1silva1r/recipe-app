@@ -127,7 +127,7 @@ export default function FavoriteRecipes() {
 
   function All() {
     return (
-      allFavorite && favorite.map((element, index) => (
+      allFavorite && favorite ? favorite.map((element, index) => (
         <div key={ element.name }>
           <Link to={ `/${element.type}s/${element.id}` }>
             <div>
@@ -160,6 +160,7 @@ export default function FavoriteRecipes() {
           <p>{ showTag && 'Link copied!' }</p>
         </div>
       ))
+        : ''
     );
   }
 
@@ -190,7 +191,7 @@ export default function FavoriteRecipes() {
             By Drink
           </button>
         </div>
-        {justFood && byFood()}
+        {justFood && allFavorite === false ? byFood() : ''}
         {justDrink && allFavorite === false ? byDrink() : ''}
         { allFavorite && justFood === false ? All() : '' }
       </div>
