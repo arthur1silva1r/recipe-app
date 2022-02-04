@@ -28,19 +28,19 @@ export default function FavoriteRecipes() {
     setShowTag(true);
   };
 
-  const teste1 = () => {
+  const setFoods = () => {
     setAllFavorite(false);
     setJustDrink(false);
     setJustFood(true);
   };
 
-  const teste2 = () => {
+  const setDrinks = () => {
     setAllFavorite(false);
     setJustFood(false);
     setJustDrink(true);
   };
 
-  const teste3 = () => {
+  const setAll = () => {
     setJustFood(false);
     setJustDrink(false);
     setAllFavorite(true);
@@ -171,21 +171,21 @@ export default function FavoriteRecipes() {
           <button
             type="button"
             data-testid="filter-by-all-btn"
-            onClick={ teste3 }
+            onClick={ setAll }
           >
             All
           </button>
           <button
             type="button"
             data-testid="filter-by-food-btn"
-            onClick={ teste1 }
+            onClick={ setFoods }
           >
             By Food
           </button>
           <button
             type="button"
             data-testid="filter-by-drink-btn"
-            onClick={ teste2 }
+            onClick={ setDrinks }
           >
             By Drink
           </button>
